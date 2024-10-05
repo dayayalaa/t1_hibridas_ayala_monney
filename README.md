@@ -1,4 +1,4 @@
-﻿# Clonar repositorio
+# Clonar repositorio
 --------------------------------------------------- 
 1. Clono el repositorio
     - git clone https://github.com/dayayalaa/t1_hibridas_ayala_monney.git
