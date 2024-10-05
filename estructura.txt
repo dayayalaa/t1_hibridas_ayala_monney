@@ -1,0 +1,43 @@
+/tp1_hibridas_ayala_monney
+│
+├── /.vscode               # Configuraciones del entorno de desarrollo (opcional), usadas por Visual Studio Code
+│
+├── /controllers           # Controladores para el backend (Express), donde se gestionan las operaciones de la API
+│   ├── userController.js   # Controlador para la gestión de usuarios (CRUD y autenticación)
+│   ├── vuelosController.js  # Controlador para la gestión de vuelos (CRUD)
+│   └── reservaController.js  # Controlador para la gestión de reservas (CRUD)
+│
+├── /models                # Modelos para interactuar con la base de datos (MongoDB), representan las entidades
+│   ├── userModels.js       # Modelo para la colección de usuarios
+│   ├── vuelosModels.js     # Modelo para la colección de vuelos
+│   └── reservaModels.js     # Modelo para la colección de reservas
+│
+├── /node_modules          # Módulos de Node.js (autogenerada por npm), contienen las dependencias instaladas
+│
+├── /public                # Archivos públicos que pueden ser servidos por el servidor o para el frontend
+│   ├── /img               # Carpeta para imágenes estáticas (recursos gráficos)
+│   └── vite.svg           # Ejemplo de un recurso gráfico, puedes poner imágenes u otros assets
+│
+├── /routes                # Definición de las rutas para Express, donde se configuran las URL de la API
+│   ├── index.js            # Ruta principal que puede redirigir a otras rutas o mostrar información general
+│   ├── userRouter.js       # Rutas para la gestión de usuarios (ej. registro, inicio de sesión)
+│   ├── vuelosRouter.js     # Rutas para la gestión de vuelos (ej. obtener, actualizar vuelos)
+│   └── reservaRouter.js     # Rutas para la gestión de reservas (ej. crear, eliminar reservas)
+│
+├── /src                   # Carpeta principal del frontend con Vue, contiene los archivos de la interfaz de usuario
+│   ├── /assets            # Archivos de imágenes, íconos, etc. utilizados en la interfaz de usuario
+│   ├── /components        # Componentes de Vue reutilizables en la aplicación
+│   ├── App.vue            # Componente raíz de Vue, donde se estructura la aplicación
+│   ├── main.js            # Archivo de entrada para Vue, donde se inicializa la aplicación
+│   └── style.css          # Archivos de estilo específicos para Vue (puedes utilizar Tailwind CSS aquí)
+│
+├── .gitignore             # Archivos y carpetas que quieres ignorar en Git (node_modules, .env)
+├── index.html             # Archivo raíz del frontend Vue (puede estar aquí o en /public si usas Vite)
+├── .env                   # Archivo para variables de entorno (credenciales, configuraciones)
+├── .env.example           # Ejemplo de archivo .env para mostrar las variables necesarias
+├── postcss.config.js      # Configuración para PostCSS, si lo usas para procesar CSS
+├── tailwind.config.js      # Configuración para Tailwind CSS, define el diseño y la personalización
+├── package-lock.json      # Bloqueo de versiones de las dependencias (generado por npm)
+├── package.json           # Dependencias y scripts de npm, también contiene metadatos del proyecto
+└── README.md              # Documentación del proyecto, incluyendo información sobre cómo configurar y usar la aplicación
+
