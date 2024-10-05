@@ -1,6 +1,7 @@
 ﻿# Clonar repositorio
+--------------------------------------------------- 
 1. Clono el repositorio
-    - git clone https://github.com/dayayalaa/ClientesClases.git
+    - git clone https://github.com/dayayalaa/t1_hibridas_ayala_monney.git
 
 2. Configuro el usuario & email
     - git config user.name "dayayalaa"
@@ -13,10 +14,4 @@
 
 4. Para obtener los últimos cambios del repositorio
     - git pull
-
-
-
------------------------- 
-# Vincular FireBase
-
-- npm install firebase
+--------------------------------------------------- 
