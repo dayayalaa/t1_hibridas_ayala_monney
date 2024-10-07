@@ -7,7 +7,7 @@ dotenv.config();
 const claveSecreta = process.env.SECRETKEY;
 const saltRounds = 10; 
 
-// Crear un nuevo usuario
+// Crea un nuevo usuario
 const crearUser = async (req, res) => {
     const { nombre, email, contraseña, rol } = req.body;
 
