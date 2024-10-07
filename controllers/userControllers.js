@@ -1,61 +1,114 @@
 const User = require('../models/userModels');
-const bcrypt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const claveSecreta = process.env.SECRETKEY;
-const salt = 10;
+const saltRounds = 10; 
 
-const crearUser = async (req , res) => {
-    const {nombre , email , contraseña} = req.body;
-    if (!nombre || !email || !contraseña){
-        res.status(400).json({msg: 'Faltan parametros obligatorios', data: {nombre, email , contraseña} })
+// Crear un nuevo usuario
+const crearUser = async (req, res) => {
+    const { nombre, email, contraseña, rol } = req.body;
+
+    if (!nombre || !email || !contraseña) {
+        return res.status(400).json({ msg: 'Faltan parámetros obligatorios' });
     }
-    const contraseñaHash = await bcrypt.hash(contraseña , salt );
 
-    try{
-        const newUser = new User ({ nombre, email , contraseña: contraseñaHash})
+    try {
+        const contraseñaHash = await bcrypt.hash(contraseña, saltRounds);
+        const newUser = new User({
+            nombre,
+            email,
+            contraseña: contraseñaHash,
+            rol: rol || 'user' 
+        });
+
         await newUser.save();
-    } catch (error){
-        console.error(error);
-        res.status(500).json({ msg: 'Ups! Tenemos un error! :C' , data: {}})
+        res.status(201).json({ msg: 'Usuario creado', data: newUser });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al crear el usuario' });
     }
+};
 
+// Inicio de sesión de usuario
+const login = async (req, res) => {
+    const { email, contraseña } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user || !(await bcrypt.compare(contraseña, user.contraseña))) {
+            return res.status(401).json({ msg: 'Email o contraseña incorrectos' });
+        }
+
+        const token = jwt.sign({ userId: user._id, rol: user.rol }, claveSecreta, { expiresIn: '1h' });
+        res.status(200).json({ msg: 'Inicio de sesión exitoso', token });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al iniciar sesión' });
     }
+};
 
-    const login = async (req , res) => {
-       try{
-        const { email , contraseña} = req.body;
-        const user = await User.findOne({ email});
-        if( !user){
-            res.status(401).json({msg: 'El email no existe', data: {}});
+// Obtiene todos los usuarios
+const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json({ data: users });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al obtener usuarios' });
+    }
+};
+
+// Obtiene usuario por ID
+const getUsersById = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
-        const contraseñaOk = await bcrypt.compare (contraseña, userr.contraseña);
-        if( !contraseñaOk){
-            res.status(401).json({ msg: 'La contraseña es incorrecta', data: {} });
+        res.status(200).json({ data: user });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al obtener usuario' });
+    }
+};
+
+// Elimina usuario por ID
+const deleteUserById = async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
-        const data = {
-            userId: user._id,
-            name: user.name
+        res.status(200).json({ msg: 'Usuario eliminado', data: user });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al eliminar usuario' });
+    }
+};
+
+// Actualizar usuario por ID
+const updateUserById = async (req, res) => {
+    const { nombre, email, contraseña, rol } = req.body;
+
+    try {
+        const updateData = { nombre, email, rol };
+        if (contraseña) {
+            updateData.contraseña = await bcrypt.hash(contraseña, saltRounds);
         }
-        const token = jwt.sign(data, claveSecreta , {expiresIn: '1h'});
-        console.log(token);
-        res.status(200).json({ msg:'success', data:{ jwt: token}});
-       } catch(error) {
-            console.error(error);
-            res.status(500).json({ msg:'Tenemos un error :c', data:{}});
+
+        const user = await User.findByIdAndUpdate(req.params.id, updateData, { new: true });
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
         }
-       }
+        res.status(200).json({ msg: 'Usuario actualizado', data: user });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al actualizar usuario' });
+    }
+};
 
-const getUsers = async (req , res) => {
-    const users = await User.find();
-    res.status(200).json({ msg: 'Ok' , data: users});
-}
-    
-    
-
-
-module.exports = {crearUser , login , getUsers }
-
-
+module.exports = {
+    crearUser,
+    login,
+    getUsers,
+    getUsersById,
+    deleteUserById,
+    updateUserById
+};
