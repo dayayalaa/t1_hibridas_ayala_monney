@@ -41,7 +41,5 @@ http://127.0.0.1:3000/
 ├── package-lock.json      # Bloqueo de versiones de las dependencias (generado por npm)
 ├── package.json           # Dependencias y scripts de npm, también contiene metadatos del proyecto
 ├── README.md 
-├── postcss.config.js      # Configuración para PostCSS, si lo usas para procesar CSS
-├── tailwind.config.js      # Configuración para Tailwind CSS, define el diseño y la personalización
 └── vite.config.js             
 
