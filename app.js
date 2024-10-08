@@ -3,19 +3,19 @@ const routerAPI = require('./routes/index.js');
 require('dotenv').config();
 
 const port = process.env.PORT;
-const arcana = express();
+const api = express();
 
 //Middleware
-arcana.use( express.json());
+api.use( express.json());
 
 // Llama a las rutas
-arcana.get('/', (req, res) => {
+api.get('/', (req, res) => {
     res.status(200).send('<h1> HOLAAA </h1>');
 })
 
-routerAPI(arcana);
+routerAPI(api);
 
 // Inicia el servidor
-arcana.listen( port, () => { 
+api.listen( port, () => { 
     console.log(`Servidor en el puerto ${port}`)
 });

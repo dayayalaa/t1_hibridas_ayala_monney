@@ -1,3 +1,5 @@
+http://127.0.0.1:3000/
+
 /tp1_hibridas_ayala_monney
 │
 ├── /.vscode               # Configuraciones del entorno de desarrollo (opcional), usadas por Visual Studio Code
@@ -31,13 +33,15 @@
 │   ├── main.js            # Archivo de entrada para Vue, donde se inicializa la aplicación
 │   └── style.css          # Archivos de estilo específicos para Vue (puedes utilizar Tailwind CSS aquí)
 │
-├── .gitignore             # Archivos y carpetas que quieres ignorar en Git (node_modules, .env)
-├── index.html             # Archivo raíz del frontend Vue (puede estar aquí o en /public si usas Vite)
 ├── .env                   # Archivo para variables de entorno (credenciales, configuraciones)
 ├── .env.example           # Ejemplo de archivo .env para mostrar las variables necesarias
-├── postcss.config.js      # Configuración para PostCSS, si lo usas para procesar CSS
-├── tailwind.config.js      # Configuración para Tailwind CSS, define el diseño y la personalización
+├── .gitignore             # Archivos y carpetas que quieres ignorar en Git (node_modules, .env)
+├── index.html             # Archivo raíz del frontend Vue (puede estar aquí o en /public si usas Vite)
+├── index.js
 ├── package-lock.json      # Bloqueo de versiones de las dependencias (generado por npm)
 ├── package.json           # Dependencias y scripts de npm, también contiene metadatos del proyecto
-└── README.md              # Documentación del proyecto, incluyendo información sobre cómo configurar y usar la aplicación
+├── README.md 
+├── postcss.config.js      # Configuración para PostCSS, si lo usas para procesar CSS
+├── tailwind.config.js      # Configuración para Tailwind CSS, define el diseño y la personalización
+└── vite.config.js             
 
