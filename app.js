@@ -7,6 +7,7 @@ const api = express();
 
 //Middleware
 api.use( express.json());
+api.use(  express.static('public') );
 
 // Llama a las rutas
 api.get('/', (req, res) => {
