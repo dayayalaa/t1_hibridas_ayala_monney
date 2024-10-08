@@ -1,11 +1,22 @@
 const express = require('express');
 const routerAPI = require('./routes/index.js');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const port = process.env.PORT;
 const api = express();
 
-//Middleware
+mongoose.connect(process.env.MONGO_URI);
+
+const db = mongoose.connection;
+
+db.on('error', () => console.error('Error'));
+db.once('open', ()=>{
+    console.log('Conexión correcta');
+})
+
+module.exports = db;
+
 api.use( express.json());
 api.use(  express.static('public') );
 

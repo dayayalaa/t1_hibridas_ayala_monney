@@ -45,7 +45,7 @@ const vuelosSchema = new Schema({
     },
     lugarEscala: {
         type: [String], 
-        default: [] 
+        default: undefined 
     },
 });
 
