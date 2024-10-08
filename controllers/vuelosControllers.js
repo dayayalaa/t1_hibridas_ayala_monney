@@ -32,7 +32,7 @@ const crearVuelos = async (req, res) => {
     const { numeroVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, aerolinea, numeroAsientosDisponibles, precio, escala, lugarEscala } = req.body;
 
 
-    if(!numeroVuelo || !origen || !destino || !fechaSalida || !fechaLlegada || !duracion || !aerolinea || !numeroAsientosDisponibles || !precio || !escala || !lugarEscala){
+    if(!numeroVuelo || !origen || !destino || !fechaSalida || !fechaLlegada || !duracion || !aerolinea || !numeroAsientosDisponibles || !precio){
         return res.status(400).json({
             msg: 'Faltan parámetros',
             data: { numeroVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, aerolinea, numeroAsientosDisponibles, precio, escala, lugarEscala }
@@ -105,7 +105,7 @@ const actualizarVueloId = async (req, res) => {
 
 //Buscar por numero de vuelo (nombre)
 const numeroBuscar = async (req, res) => {
-    const { numeroVuelo } = req.query;
+    const { numeroVuelo } = req.params;
 
     try {
         if (numeroVuelo) {
@@ -117,13 +117,14 @@ const numeroBuscar = async (req, res) => {
 
             return res.json(vuelo);
         } else {
-            const vuelo = await Vuelos.find();
-            res.json(vuelo);
+            const vuelos = await Vuelos.find();
+            res.json(vuelos);
         }
     } catch (error) {
-        res.status(500).json({ mensaje: 'Error al buscar vuelos', error: error.message });
+        res.status(500).json({ mensaje: 'Error en la obtención de vuelos por numero', error: error.message });
     }
 };
+
 
 //Filtro por fecha de salida y destino
 

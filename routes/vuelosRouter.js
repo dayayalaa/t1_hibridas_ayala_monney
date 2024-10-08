@@ -15,6 +15,6 @@ router.get('/:id', obtenerVuelosId);
 router.post('/', crearVuelos);
 router.delete('/:id', borraVueloId);
 router.put('/:id', actualizarVueloId);
-router.get('/buscar', numeroBuscar);
+router.get('/buscar/:numeroVuelo', numeroBuscar);
 
 module.exports = router;
