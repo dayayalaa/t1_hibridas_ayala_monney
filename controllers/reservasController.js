@@ -1,13 +1,13 @@
 const Reservas = require('../models/reservasModels');
 
-//Crear reserva
+// Crear reserva
 const crearReserva = async (req, res) => {
-    const { vueloId, usuarioId } = req.body;
+    const { vuelos, user } = req.body;
 
     try {
         const nuevaReserva = new Reservas({
-            vuelo: vueloId,    
-            usuario: usuarioId    
+            vuelos,
+            user
         });
         await nuevaReserva.save();
         res.status(201).json({ msg: 'Reserva creada', data: nuevaReserva });
@@ -16,73 +16,75 @@ const crearReserva = async (req, res) => {
     }
 };
 
-//Obtener reserva
-const obtenerReserva = async (req, res) => {
-        try {
-            const reserva = await Reservas.findById(req.params.id)
-            //.populate() trae datos de otros modelos
-                .populate('vuelo')   
-                .populate('usuario'); 
-            res.status(200).json(reserva);
-        } catch (error) {
-            res.status(500).json({ msg: 'Error al obtener la reserva', error });
-        }
-};
+// Obtener todas las reservas
+const obtenerReservas = async (req, res) => {
+    try {
+        const reservas = await Reservas.find()
+            .populate('vuelos')   // Relacionar con vuelos
+            .populate('user');     // Relacionar con usuarios
 
-//Obtener reserva por id
-const obtenerReservaId = async (req, res) => {
-    const {id} = req.params;
-
-    try{
-        const reserva = await Reservas.findById(id);
-        res.status(200).json({msg: 'Exito al encontrar la reserva por id', reserva});
-
-        if(!reserva){
-            return res.status(404).json({msg:'Reserva no encontrada'});
-        }
-            res.status(200).json({msg: 'Exito al encontrar la reserva por id', reserva});
-    } catch (error){
-        res.status(500).json({ msg: 'Error al obtener la reserva por id', error });
+        res.status(200).json({ msg: 'Reservas obtenidas', data: reservas });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al obtener las reservas', error: error.message });
     }
 };
 
-//Borrar reserva
+// Obtener una reserva por ID
+const obtenerReservaId = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const reserva = await Reservas.findById(id)
+            .populate('vuelos')
+            .populate('user');
+
+        if (!reserva) {
+            return res.status(404).json({ msg: 'Reserva no encontrada' });
+        }
+
+        res.status(200).json({ msg: 'Reserva obtenida', data: reserva });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error al obtener la reserva', error: error.message });
+    }
+};
+
+// Borrar reserva
 const borrarReserva = async (req, res) => {
     const { id } = req.params;
 
     try {
         const reserva = await Reservas.findByIdAndDelete(id);
-        if (reserva) {
-            res.status(200).json({ msg: 'Reserva borrada', data: reserva });
-        } else {
-            res.status(404).json({ msg: 'Reserva no encontrada' });
+        if (!reserva) {
+            return res.status(404).json({ msg: 'Reserva no encontrada' });
         }
+        res.status(200).json({ msg: 'Reserva borrada', data: reserva });
     } catch (error) {
-        res.status(500).json({ msg: 'Error al borrar la reserva', error });
+        res.status(500).json({ msg: 'Error al borrar la reserva', error: error.message });
     }
 };
 
-//Actualizar reserva
+// Actualizar reserva
 const actualizarReserva = async (req, res) => {
     const { id } = req.params;
-    const { vueloId, usuarioId } = req.body;
+    const { vuelos, user } = req.body;
 
     try {
-        const reserva = await Reservas.findByIdAndUpdate(id, { vuelo: vueloId, usuario: usuarioId }, { new: true, runValidators: true });
+        const reserva = await Reservas.findByIdAndUpdate(id, { vuelos, user }, { new: true, runValidators: true });
 
         if (!reserva) {
             return res.status(404).json({ msg: 'Reserva no encontrada' });
         }
+
         res.status(200).json({ msg: 'Reserva actualizada', data: reserva });
     } catch (error) {
-        res.status(500).json({ msg: 'Error al actualizar la reserva', error });
+        res.status(500).json({ msg: 'Error al actualizar la reserva', error: error.message });
     }
 };
 
 module.exports = {
     crearReserva,
-    obtenerReserva,
+    obtenerReservas,  
     obtenerReservaId,
     borrarReserva,
     actualizarReserva,
-}
+};
