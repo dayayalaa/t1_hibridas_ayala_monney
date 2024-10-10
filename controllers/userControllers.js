@@ -9,10 +9,10 @@ const saltRounds = 10;
 
 // Crea un nuevo usuario
 const crearUser = async (req, res) => {
-    const { nombre, email, contraseña, rol } = req.body;
+    const { nombre, email, contraseña,rols } = req.body;
 
     if (!nombre || !email || !contraseña) {
-        return res.status(400).json({ msg: 'Faltan parámetros obligatorios' });
+        return res.status(400).json({ msg: 'Faltan parámetros obligatorios', error: error.message });
     }
 
     try {
@@ -21,13 +21,13 @@ const crearUser = async (req, res) => {
             nombre,
             email,
             contraseña: contraseñaHash,
-            rol: rol || 'user' 
+            rols: rols || 'user' 
         });
 
         await newUser.save();
         res.status(201).json({ msg: 'Usuario creado', data: newUser });
     } catch (error) {
-        res.status(500).json({ msg: 'Error al crear el usuario' });
+        res.status(500).json({ msg: 'Error al crear el usuario', error: error.message });
     }
 };
 
@@ -41,7 +41,7 @@ const login = async (req, res) => {
             return res.status(401).json({ msg: 'Email o contraseña incorrectos' });
         }
 
-        const token = jwt.sign({ userId: user._id, rol: user.rol }, claveSecreta, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id, rols: user.rols }, claveSecreta, { expiresIn: '1h' });
         res.status(200).json({ msg: 'Inicio de sesión exitoso', token });
     } catch (error) {
         res.status(500).json({ msg: 'Error al iniciar sesión' });
@@ -86,10 +86,10 @@ const deleteUserById = async (req, res) => {
 
 // Actualizar usuario por ID
 const updateUserById = async (req, res) => {
-    const { nombre, email, contraseña, rol } = req.body;
+    const { nombre, email, contraseña, rols } = req.body;
 
     try {
-        const updateData = { nombre, email, rol };
+        const updateData = { nombre, email, rols };
         if (contraseña) {
             updateData.contraseña = await bcrypt.hash(contraseña, saltRounds);
         }

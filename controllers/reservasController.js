@@ -5,21 +5,21 @@ const crearReserva = async (req, res) => {
     const { vueloId, usuarioId } = req.body;
 
     try {
-        const nuevaReserva = new Reserva({
+        const nuevaReserva = new Reservas({
             vuelo: vueloId,    
             usuario: usuarioId    
         });
         await nuevaReserva.save();
         res.status(201).json({ msg: 'Reserva creada', data: nuevaReserva });
     } catch (error) {
-        res.status(500).json({ msg: 'Error al crear la reserva', error });
+        res.status(500).json({ msg: 'Error al crear la reserva', error: error.message });
     }
 };
 
 //Obtener reserva
 const obtenerReserva = async (req, res) => {
         try {
-            const reserva = await Reserva.findById(req.params.id)
+            const reserva = await Reservas.findById(req.params.id)
             //.populate() trae datos de otros modelos
                 .populate('vuelo')   
                 .populate('usuario'); 
