@@ -1,0 +1,41 @@
+[
+  {
+    "numeroVuelo": "AR1234",
+    "origen": "EZE",
+    "destino": "COR",
+    "fechaSalida": "2024-11-01T09:00:00.000Z",
+    "fechaLlegada": "2024-11-01T10:30:00.000Z",
+    "duracion": 90,
+    "aerolinea": "Aerolíneas Argentinas",
+    "numeroAsientosDisponibles": 150,
+    "precio": 120,
+    "escala": false,
+    "lugarEscala": []
+  },
+  {
+    "numeroVuelo": "LA4567",
+    "origen": "AEP",
+    "destino": "MDZ",
+    "fechaSalida": "2024-11-05T15:00:00.000Z",
+    "fechaLlegada": "2024-11-05T17:00:00.000Z",
+    "duracion": 120,
+    "aerolinea": "LATAM",
+    "numeroAsientosDisponibles": 100,
+    "precio": 150,
+    "escala": false,
+    "lugarEscala": []
+  },
+  {
+    "numeroVuelo": "AR7890",
+    "origen": "EZE",
+    "destino": "BRC",
+    "fechaSalida": "2024-12-01T13:00:00.000Z",
+    "fechaLlegada": "2024-12-01T16:00:00.000Z",
+    "duracion": 180,
+    "aerolinea": "Aerolíneas Argentinas",
+    "numeroAsientosDisponibles": 120,
+    "precio": 180,
+    "escala": true,
+    "lugarEscala": ["NQN"]
+  }
+]

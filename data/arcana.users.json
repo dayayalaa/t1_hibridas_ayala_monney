@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Dai",
+    "email": "dai@example.com",
+    "contraseña": "dai123",
+    "rols": "user",
+    "created": "2024-11-01T10:30:00.000Z"
+  },
+  {
+    "nombre": "Mai",
+    "email": "mai@example.com",
+    "contraseña": "mai123",
+    "rols": "user",
+    "created": "2024-11-01T10:30:00.000Z"
+  },
+  {
+    "nombre": "Sofi",
+    "email": "sofi@example.com",
+    "contraseña": "sofi123",
+    "rols": "user",
+    "created": "2024-11-01T10:30:00.000Z"
+  }
+]
