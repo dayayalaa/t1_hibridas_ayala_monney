@@ -128,7 +128,7 @@ const numeroBuscar = async (req, res) => {
 
 //Filtra por destino
 const filtrarVuelosPorDestino = async (req, res) => {
-    const { destino } = req.query; 
+    const { destino } = req.params; 
 
     if (!destino) {
         return res.status(400).json({ msg: 'Falta el parámetro de destino' });
@@ -140,6 +140,7 @@ const filtrarVuelosPorDestino = async (req, res) => {
         if (vuelos.length === 0) {
             return res.status(404).json({ msg: 'No se encontro vuelos en ese destino' });
         }
+        res.status(200).json({ msg: 'Vuelos encontrados', vuelos });
     } catch (error) {
         res.status(500).json({ msg: 'Erro en obtener los datos', error: error.message });
     }
@@ -148,7 +149,7 @@ const filtrarVuelosPorDestino = async (req, res) => {
 
 // Filtra por aerolinea
 const filtrarVuelosPorAerolinea = async (req, res) => {
-    const { aerolinea } = req.query; 
+    const { aerolinea } = req.params; 
 
     if (!aerolinea) {
         return res.status(400).json({ msg: 'Falta el parámetro de aerolínea' });
