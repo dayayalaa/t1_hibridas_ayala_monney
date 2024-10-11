@@ -1,5 +1,6 @@
 [
   {
+    "_id": "67098387a5a1c453f2e30733",
     "nombre": "Dai",
     "email": "dai@example.com",
     "contraseña": "dai123",
@@ -7,6 +8,7 @@
     "created": "2024-11-01T10:30:00.000Z"
   },
   {
+    "_id": "67098387a5a1c453f2e30734",
     "nombre": "Mai",
     "email": "mai@example.com",
     "contraseña": "mai123",
@@ -14,6 +16,7 @@
     "created": "2024-11-01T10:30:00.000Z"
   },
   {
+    "_id": "67098387a5a1c453f2e30735",
     "nombre": "Sofi",
     "email": "sofi@example.com",
     "contraseña": "sofi123",

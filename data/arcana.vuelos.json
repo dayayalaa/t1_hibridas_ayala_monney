@@ -1,5 +1,6 @@
 [
   {
+    "_id": "670983a63ebd40e1a5c51fa1",
     "numeroVuelo": "AR1234",
     "origen": "EZE",
     "destino": "COR",
@@ -13,6 +14,7 @@
     "lugarEscala": []
   },
   {
+    "_id": "670983a63ebd40e1a5c51fa3",
     "numeroVuelo": "LA4567",
     "origen": "AEP",
     "destino": "MDZ",
@@ -26,6 +28,7 @@
     "lugarEscala": []
   },
   {
+    "_id": "670983a63ebd40e1a5c51fa2",
     "numeroVuelo": "AR7890",
     "origen": "EZE",
     "destino": "BRC",

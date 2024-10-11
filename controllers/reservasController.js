@@ -4,6 +4,11 @@ const Reservas = require('../models/reservasModels');
 const crearReserva = async (req, res) => {
     const { vuelos, user } = req.body;
 
+    // Validar IDs
+    if (!mongoose.Types.ObjectId.isValid(vuelos) || !mongoose.Types.ObjectId.isValid(user)) {
+        return res.status(400).json({ msg: 'ID de vuelos o user no válido' });
+    }
+
     try {
         const nuevaReserva = new Reservas({
             vuelos,
@@ -16,18 +21,19 @@ const crearReserva = async (req, res) => {
     }
 };
 
-// Obtener todas las reservas
+// Obtener reserva
 const obtenerReservas = async (req, res) => {
     try {
         const reservas = await Reservas.find()
-            .populate('vuelos') 
-            .populate('user');     
+            .populate('vuelos')
+            .populate('user');
 
         res.status(200).json({ msg: 'Reservas obtenidas', data: reservas });
     } catch (error) {
         res.status(500).json({ msg: 'Error al obtener las reservas', error: error.message });
     }
 };
+
 
 // Obtener una reserva por ID
 const obtenerReservaId = async (req, res) => {
