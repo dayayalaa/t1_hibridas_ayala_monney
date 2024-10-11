@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
-const Vuelos = require('./vuelosModels');
-const User = require('./userModels');
 const Schema = mongoose.Schema;
 
 const reservasSchema = new Schema({
     user:{
-        type: Schema.ObjectId,
-        ref: User,
+        type: String,
         required: true,
     },
     vuelos:{
-        type: Schema.ObjectId,
-        ref: Vuelos,
+        type: String,
         required: true,
     },
     fecha:{
