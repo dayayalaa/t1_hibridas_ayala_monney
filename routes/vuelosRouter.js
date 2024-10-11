@@ -8,6 +8,8 @@ const {
     borraVueloId,
     actualizarVueloId,
     numeroBuscar,
+    filtrarVuelosPorDestino, 
+    filtrarVuelosPorAerolinea 
 } = require('../controllers/vuelosControllers');
 
 router.get('/', obtenerVuelos);
@@ -16,5 +18,10 @@ router.post('/', crearVuelos);
 router.delete('/:id', borraVueloId);
 router.put('/:id', actualizarVueloId);
 router.get('/buscar/:numeroVuelo', numeroBuscar);
+
+
+//filtros 
+router.get('/filtrar/destino/:destino', filtrarVuelosPorDestino); 
+router.get('/filtrar/aerolinea/:aerolinea', filtrarVuelosPorAerolinea);
 
 module.exports = router;

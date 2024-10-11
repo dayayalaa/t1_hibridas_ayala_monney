@@ -78,7 +78,7 @@ const borraVueloId = async (req, res) =>{
     }
     catch (error){
         console.log(error);
-        res.status(500).json({ msg: 'Hasy un error al eliminar el vuelo', data: {}});
+        res.status(500).json({ msg: 'Hay un error al eliminar el vuelo', data: {}});
     }
 }
 
@@ -99,7 +99,7 @@ const actualizarVueloId = async (req, res) => {
     }
     catch (error){
         console.log(error);
-        res.status(500).json({ msg: 'Hasy un error al actualizar el vuelo', data: {}});
+        res.status(500).json({ msg: 'Hay un error al actualizar el vuelo', data: {}});
     }
 }
 
@@ -126,7 +126,46 @@ const numeroBuscar = async (req, res) => {
 };
 
 
-//Filtro por fecha de salida y destino
+//Filtra por destino
+const filtrarVuelosPorDestino = async (req, res) => {
+    const { destino } = req.query; 
+
+    if (!destino) {
+        return res.status(400).json({ msg: 'Falta el parámetro de destino' });
+    }
+
+    try {
+        const vuelos = await Vuelos.find({ destino }); 
+
+        if (vuelos.length === 0) {
+            return res.status(404).json({ msg: 'No se encontro vuelos en ese destino' });
+        }
+    } catch (error) {
+        res.status(500).json({ msg: 'Erro en obtener los datos', error: error.message });
+    }
+};
+
+
+// Filtra por aerolinea
+const filtrarVuelosPorAerolinea = async (req, res) => {
+    const { aerolinea } = req.query; 
+
+    if (!aerolinea) {
+        return res.status(400).json({ msg: 'Falta el parámetro de aerolínea' });
+    }
+
+    try {
+        const vuelos = await Vuelos.find({ aerolinea }); 
+
+        if (vuelos.length === 0) {
+            return res.status(404).json({ msg: 'No se encontro vuelos en esa aerolinea' });
+        }
+
+        res.status(200).json({ msg: 'Se obtuvo los datos ', vuelos });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error en obtener los datos de la aerolinea', error: error.message });
+    }
+};
 
 
 module.exports = {
@@ -136,4 +175,6 @@ module.exports = {
     borraVueloId,
     actualizarVueloId,
     numeroBuscar,
+    filtrarVuelosPorDestino,
+    filtrarVuelosPorAerolinea
 };
