@@ -19,15 +19,12 @@ module.exports = db;
 
 api.use( express.json());
 api.use(  express.static('public') );
-
-// Llama a las rutas
 api.get('/', (req, res) => {
     res.status(200).send('<h1> HOLAAA </h1>');
 })
 
 routerAPI(api);
-
-// Inicia el servidor
 api.listen( port, () => { 
     console.log(`Servidor en el puerto ${port}`)
 });
+

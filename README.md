@@ -1,17 +1,14 @@
-# Clonar repositorio
+# Aplicaciones Hibridas
 --------------------------------------------------- 
-1. Clono el repositorio
-    - git clone https://github.com/dayayalaa/t1_hibridas_ayala_monney.git
+## Nombre y Apellido:
+- Daiana Ayala
+- Mailen Monney 
 
-2. Configuro el usuario & email
-    - git config user.name "dayayalaa"
-    - git config user.mail "day1414@hotmail.com"
+## Nombre de la materia: 
+- Aplicaciones Hibridas
 
-3. Agrego los archivos, comento y realizo push
-    - git add .
-    - git commit -m "Agregar comentario"
-    - git push 
-
-4. Para obtener los últimos cambios del repositorio
-    - git pull
+## Nombre del docente:
+- Jonathan Cruz
+## Comisión: 
+- DWM4AP
 --------------------------------------------------- 

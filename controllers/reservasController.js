@@ -20,8 +20,8 @@ const crearReserva = async (req, res) => {
 const obtenerReservas = async (req, res) => {
     try {
         const reservas = await Reservas.find()
-            .populate('vuelos')   // Relacionar con vuelos
-            .populate('user');     // Relacionar con usuarios
+            .populate('vuelos') 
+            .populate('user');     
 
         res.status(200).json({ msg: 'Reservas obtenidas', data: reservas });
     } catch (error) {
